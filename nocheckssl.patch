@@ -1,0 +1,15 @@
+diff --git a/src/http.cc b/src/http.cc
+index 795fca3..8b274ca 100644
+--- a/src/http.cc
++++ b/src/http.cc
+@@ -123,6 +123,9 @@ int HttpPost(const std::string &url, const std::string &data,
+   curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE_LARGE,
+                    static_cast<curl_off_t>(context.to_server_size()));
+ 
++  // Ignore SSL
++  curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
++
+   // Callbacks.
+   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &RequestContext::Write);
+   curl_easy_setopt(curl, CURLOPT_WRITEDATA, &context);
+
